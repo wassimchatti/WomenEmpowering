@@ -1,0 +1,195 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	template="/pages/admin/admintheme.xhtml">
+
+	<ui:define name="content">
+		<h:form class="form-horizontal form-label-left">
+
+			<div class="page-title">
+				<div class="title_left">
+					<h3>Ajouter Produits</h3>
+				</div>
+
+				<div class="title_right">
+					<div
+						class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
+						<div class="input-group">
+							<input type="text" class="form-control"
+								placeholder="Search for..." /> <span class="input-group-btn">
+								<button class="btn btn-default" type="button">Go!</button>
+							</span>
+						</div>
+					</div>
+				</div>
+			</div>
+
+
+			<center>
+				<div class="row">
+					<div class="col-md-12 col-xs-12">
+						<div class="x_panel">
+							<div class="x_title">
+								<h2>
+									Gérer Les <small>Produits :</small>
+								</h2>
+								<ul class="nav navbar-right panel_toolbox">
+									<li><a class="collapse-link"><i
+											class="fa fa-chevron-up"></i></a></li>
+									<li class="dropdown"><a href="#" class="dropdown-toggle"
+										data-toggle="dropdown" role="button" aria-expanded="false"><i
+											class="fa fa-wrench"></i></a>
+										<ul class="dropdown-menu" role="menu">
+											<li><a href="#">Settings 1</a></li>
+											<li><a href="#">Settings 2</a></li>
+										</ul></li>
+									<li><a class="close-link"><i class="fa fa-close"></i></a>
+									</li>
+								</ul>
+								<div class="clearfix"></div>
+							</div>
+							<div class="x_content">
+								<br />
+
+
+								<div class="form-group">
+									<label class="control-label col-md-3 col-sm-3 col-xs-12">Nom
+										Produit</label>
+									<div class="col-md-4">
+										<h:inputText value="#{produitBean.nomProduit}"
+											class="form-control" placeholder="nom de produit" />
+
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="control-label col-md-3 col-sm-3 col-xs-12">Date
+										Création </label>
+									<div class="col-md-4">
+										<h:inputText id="date" value="#{produitBean.date}"
+											class="form-control" disabled="true">
+											<f:convertDateTime pattern="dd-MM-yyyy" />
+										</h:inputText>
+
+									</div>
+								</div>
+								<h:message for="date" style="color:red" />
+
+								<div class="form-group">
+									<label class="control-label col-md-3 col-sm-3 col-xs-12">Prix</label>
+									<div class="col-md-4">
+
+										<h:inputText value="#{produitBean.price}" class="form-control"
+											placeholder="Prix" id="validateSalaire" required="true"
+											requiredMessage="* Salaire obligatoire"
+											validatorMessage="* Salaire entre 350 et 3500">
+											<f:validateDoubleRange minimum="1" maximum="15000000"
+												for="validateSalaire"></f:validateDoubleRange>
+										</h:inputText>
+									</div>
+								</div>
+								<h:message for="validateSalaire" style="color:green" />
+
+
+
+								<div class="form-group">
+									<label class="control-label col-md-3 col-sm-3 col-xs-12">Promotion
+										(%)</label>
+									<div class="col-md-4">
+
+										<h:inputText value="#{produitBean.promotion}"
+											class="form-control" placeholder="Promotion"
+											id="validateSalaire2" requiredMessage="* Salaire obligatoire"
+											validatorMessage="* Salaire entre 350 et 3500" >
+											<f:validateDoubleRange minimum="0" maximum="100"
+												for="validateSalaire2"></f:validateDoubleRange>
+										</h:inputText>
+									</div>
+								</div>
+								
+								
+								<div class="form-group">
+									<label class="control-label col-md-3 col-sm-3 col-xs-12">Date Fin Promotion
+										</label>
+									<div class="col-md-4">
+                                    <p:calendar pattern="dd-MM-yyyy hh:mm:ss" value="#{produitBean.dateFinpromotion}" >
+                                    
+                                    </p:calendar>
+									</div>
+								</div>
+
+
+								<div class="form-group">
+									<label class="control-label col-md-3 col-sm-3 col-xs-12">Description</label>
+									<div class="col-md-4">
+
+
+										<h:inputTextarea value="#{produitBean.description}"
+											class="form-control" placeholder="Description" />
+									</div>
+								</div>
+
+
+								<div class="form-group">
+									<label class="control-label col-md-3 col-sm-3 col-xs-12">Quantite</label>
+									<div class="col-md-4">
+
+
+										<h:inputText value="#{produitBean.quantite}"
+											class="form-control"
+											onkeypress="if(event.which &lt; 48 || event.which &gt; 57) return false;" />
+									</div>
+								</div>
+
+								<div class="form-group">
+									<label class="control-label col-md-3 col-sm-3 col-xs-12">Categorie</label>
+									<div class="col-md-4">
+                                       
+										<p:selectOneMenu style="width:200px"
+											value="#{produitBean.selectedCategorieId}">
+											<f:selectItems value="#{produitBean.categoriesProduits}"
+												var="ProCat" itemValue="#{ProCat.categorieId}"
+												itemLabel="#{ProCat.nameCategorie}" id="txt"/>
+										</p:selectOneMenu>
+										<p:poll interval="3" listener="#{ProCat.nameCategorie}"
+															update="txt" />
+
+									</div>
+								</div>
+
+
+
+
+
+
+
+								<div class="ln_solid"></div>
+								<div class="form-group">
+									<div class="col-md-9 col-sm-9 col-xs-12 col-md-offset-3">
+										<button type="button" class="btn btn-primary">Cancel</button>
+										<h:commandButton class="btn btn-success"
+											action="#{produitBean.ajouteProduit()}"
+											value="Ajouter Produit" />
+
+									</div>
+								</div>
+
+
+							</div>
+						</div>
+					</div>
+				</div>
+
+
+
+
+			</center>
+
+		</h:form>
+	</ui:define>
+
+
+
+</ui:composition>
+

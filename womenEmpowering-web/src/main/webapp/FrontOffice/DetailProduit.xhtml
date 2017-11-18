@@ -1,0 +1,173 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/FrontOffice/Acceuil.xhtml">
+
+	<ui:define name="home">
+
+		<h:form>
+
+			<div class="inner-banner">
+				<div class="container">
+					<h2>Shop Detail</h2>
+					<ol class="breadcrumb">
+						<li><a href="#">Home</a></li>
+						<li><a href="#">Library</a></li>
+						<li class="active">Data</li>
+					</ol>
+				</div>
+			</div>
+
+			<div class="col-lg-9">
+				<div class="content">
+					<div class="container">
+						<div class="content-cover">
+							<div class="row">
+								<!--PAGE CONTENT START-->
+								<div class="col-lg-9">
+									<!--PRODUCT DETAIL START-->
+									<div class="kode-shop-detail">
+										<div class="kode-thumb">
+											<div class="larg-image">
+												<a href=""><img src="JS/images\large-view.jpg" alt="" /></a>
+											</div>
+
+										</div>
+										<div class="kode-text">
+											<div class="header">
+												<h2>
+													<h:outputText value="#{produitBean.nomProduit}" />
+												</h2>
+												<h2 class="price">
+												<h:form>
+													<h:outputText id="txt" value="#{produitBean.price - (produitBean.price*produitBean.promotion/100)}" />
+														<p:poll interval="3" listener="#{produitBean.promotion}"
+															update="txt" />
+													(DT)
+													</h:form>
+												</h2>
+											</div>
+											<div class="kode-rating">
+												<div class="rating">
+													<span>☆</span><span>☆</span><span>☆</span><span>☆</span><span>☆</span>
+												</div>
+												<div></div>
+												<div></div>
+
+											</div>
+											<br />
+											<h5>
+												Description :
+												<h:outputText value="#{produitBean.description}" />
+											</h5>
+
+											<h5>
+												Quantite :
+												<h:outputText value="#{produitBean.quantite}" />
+											</h5>
+
+
+                                         
+											<div class="product-info">
+											<c:if test="${produitBean.promotion ne 0}">
+												<h1>
+													<strong>Date Limite Promotion : </strong>
+
+													<h:form>
+														<h:outputText id="txt_count" value="#{produitBean.printDifference()}" />
+														<p:poll interval="3" listener="#{produitBean.printDifference()}"
+															update="txt_count"  />
+													</h:form>
+												</h1>
+												</c:if>
+												<p>
+													<strong>Product ID : </strong>
+													<h:outputText value="#{produitBean.produitIdToUpdate}" />
+												</p>
+
+
+
+											</div>
+											
+											<div class="product-quantity">
+												<h:commandButton class="btn-filled cart"
+													action="#{produitBean.ajouteFavoris()}" value="Add Favoris" />
+													<c:if test="${produitBean.promotion ne 0}">
+													<img src="JS/images/promo31.jpg" />
+													 </c:if>
+											</div>
+                                           
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+
+
+
+				<div class="kode-reviews">
+
+					<ul class="nav nav-tabs" role="tablist">
+						<li role="presentation" class="active"><a href="#Description"
+							aria-controls="home" role="tab" data-toggle="tab">Comments</a></li>
+						<li role="presentation"><a href="#Reviews"
+							aria-controls="Reviews" role="tab" data-toggle="tab">Add
+								comment</a></li>
+					</ul>
+
+					<!-- Tab panes -->
+					<div class="tab-content">
+						<div role="tabpanel" class="tab-pane active" id="Description">
+                           <c:forEach items="#{produitBean.commentAll}" var="c">
+							<p>
+							<h:outputLabel value="#{c.nomComment}" />
+							</p>
+                            </c:forEach>
+						</div>
+						<div role="tabpanel" class="tab-pane" id="Reviews">
+							<div class="customer-reviews">
+								<div class="kode-thumb">
+									<img src="JS/images\review.jpg" alt="" />
+								</div>
+
+								<div class="add-comment">
+									<h2>Add Reviews</h2>
+									<div class="row">
+
+										<div class="col-sm-6">
+											<div class="input-container">
+												<h:inputTextarea value="#{produitBean.nomComment}" />
+											</div>
+										</div>
+										<div class="col-md-6">
+											<h:commandButton class="btn btn-success"
+												action="#{produitBean.ajouteComment()}" value="Add Comment" />
+
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+
+
+
+
+
+
+
+		</h:form>
+
+
+	</ui:define>
+
+</ui:composition>

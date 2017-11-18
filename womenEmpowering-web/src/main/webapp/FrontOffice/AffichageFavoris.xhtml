@@ -1,0 +1,100 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/FrontOffice/Acceuil.xhtml">
+
+	<ui:define name="home">
+
+		<h:form>
+
+			<div class="inner-banner">
+				<div class="container">
+					<h2>Shop Detail</h2>
+					<ol class="breadcrumb">
+						<li><a href="#">Home</a></li>
+						<li><a href="#">Library</a></li>
+						<li class="active">Data</li>
+					</ol>
+				</div>
+			</div>
+			
+			
+			<div class="content">
+    	<div class="container">
+        	<div class="content-cover">
+            	<c:forEach items="#{produitBean.favoisAll}" var="pro">
+                <div class="kode-cause-list kode-list-view">
+                    <div class="kode-thumb">
+                        <a href="#"><img src="JS/images\cause-listing.jpg" alt=""/></a>
+                    </div>
+                    <div class="kode-cause-content">
+                        <div class="kode-text">
+                            <h2><h:outputText value="#{pro.nomProduit}" /> </h2>
+                            
+                            <div class="kode-cause-meta">
+                                <ul>
+                                    <li><a href="#"><i class="fa fa-heart-o"></i>55 Likes</a></li>
+                                    <li><a href="#"><i class="fa fa-comments-o"></i>125 Comments</a></li>
+                                </ul>
+                            </div>
+                            <!--COUSES META END-->
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate </p>
+                        </div>
+                        
+                        <div class="kode-fund-raised">
+                            
+                            <div class="raised-text">
+                                <h6>$5,350 Raised</h6>
+                            </div>
+                            <!--SUPPORTERS END-->
+                            <!--PROGRESS BAR START-->
+                            <div class="progress">
+                                <div class="progress-bar" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 40%">
+                                    40%
+                                </div>
+                            </div>
+                           
+                            <div class="raised-text">
+                                <h6>Goal</h6>
+                                <h6 class="pull-right">$10,000</h6>
+                            </div>
+                            <!--GOAL END-->
+                            <a href="#" class="btn-filled-rounded">Donate Now</a>
+                            <div class="fund-meta">
+                                <ul>
+                                    <li><a href="#"><i class="fa fa-clock-o"></i> 13H</a></li>
+                                    <li><a href="#"><i class="fa fa-share-square-o"></i> 526</a></li>
+                                    <li><a href="#"><i class="fa fa-eye"></i> 856</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                       
+                    </div>
+                </div>
+                </c:forEach>
+			</div>
+			</div>
+			</div>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+				</h:form>
+
+
+	</ui:define>
+
+</ui:composition>

@@ -1,0 +1,95 @@
+
+
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	template="/FrontOffice/Acceuil.xhtml">
+
+	<ui:define name="home">
+
+
+
+
+		<h:form>
+
+
+
+			<div class="inner-banner">
+				<div class="container">
+					<h2>Shop</h2>
+					<ol class="breadcrumb">
+						<li><a href="#">Home</a></li>
+						<li><a href="#">Library</a></li>
+						<li class="active">Data</li>
+					</ol>
+				</div>
+			</div>
+
+
+
+			<!--CONTENT START-->
+			<div class="content">
+				<div class="container">
+					<div class="content-cover">
+						<div class="row">
+							<!--RIGHT SIDE BAR START-->
+
+							<!--RIGHT SIDE BAR END-->
+							<!--PAGE CONTENT START-->
+							<div class="col-lg-9">
+								<div class="kode-shop">
+									<ul class="row">
+										<!--PROUCT LIST START-->
+										
+										<c:forEach items="#{produitBean.produitAll}" var="pro">
+										<li class="col-lg-4">
+											<div class="kode-product">
+												<div class="kode-thumb">
+													<a href="#"><img src="JS/images\shop.png" alt=""/></a>
+													<c:if test="${pro.promotion ne 0}">
+													<div class="rating">
+														<span><img src="JS/images\offer.png" alt=""/></span>
+													</div>
+													</c:if>
+												</div>
+												<div class="kode-text">
+													<h2>
+														<h:outputText value="#{pro.nameProduct}" />
+													</h2>
+													<h4>
+														<a href=""><h:outputText value="#{pro.priceProduct}" /> (DT) </a>
+													</h4>
+													
+													<c:if test="${pro.promotion ne 0}">
+													<p style="color:red;" class="price">New  <span>☆</span>  <h:outputText value="#{pro.priceProduct - (pro.priceProduct*pro.promotion/100)}" /> (DT)</p>
+													</c:if>
+													
+													
+										<button class="btn-filled cart">Achat</button>
+												<h:commandButton class="btn-filled view" action="#{produitBean.AfficheDetail(pro)}" value="View" />
+												</div>
+											</div>
+										</li>
+										</c:forEach>
+									</ul>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+
+
+
+
+		</h:form>
+
+	</ui:define>
+
+
+
+</ui:composition>

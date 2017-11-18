@@ -1,0 +1,110 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+<title>Login Admin Women Empowering</title>
+<!-- Compiled and minified CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css"/>
+<!--Import jQuery before materialize.js-->
+  <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+  <!-- Compiled and minified JavaScript -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
+ 
+
+</h:head>
+<h:body styleClass="cyna lighten-5">
+<center>
+<br /><br />
+<h:outputText value="Application Women Empowering" style="font-weight:bold"/>
+<br /><br />
+<div class="valign-wrapper" id="login-page">
+  <div class="container">
+     <div class="center-align">
+        <div class="row">
+            <div class="col s6 offset-3">
+                <div class="card">
+                   <div class="card-content">
+                       <img class="responsive-img" style="max-width: 64px;" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTAEtADPiAYY1Gs0CWKAC57TbzxPtm0BvtkJnaJsnrcFz8eB-oOzA"  />
+                          <div class="left-align">
+                            <h:form id="login-form">              
+
+                               <p:growl autoUpdate="true" /> 
+                                 <div class="row">
+                                   <div class="col s12 input-field">
+                                       <h:inputText id="Prenom"  value="#{registreUtilisateurBean.prenom}" required="true" requiredMessage="Prenom is required" />
+                                       <h:outputLabel value="Prenom" for="Prenom"/>
+
+                                   </div>
+
+                                   <div class="col s12 input-field">
+                                     <h:inputText id="nom"  value="#{registreUtilisateurBean.nom}" required="true" requiredMessage="nom is required" />
+                                     <h:outputLabel value="nom" for="nom"/>
+
+                                   </div>
+                                   
+                                   <div class="col s12 input-field">
+                                     <h:inputSecret  id="Password"  value="#{registreUtilisateurBean.password}" required="true" requiredMessage="Password is required" />
+                                     <h:outputLabel value="Password" for="Password"/>
+
+                                   </div>
+                                   
+                                   <div class="col s12 input-field">
+                                     <h:inputText id="Email"  value="#{registreUtilisateurBean.email}" required="true" requiredMessage="Email is required" />
+                                     <h:outputLabel value="Email" for="Email"/>
+
+                                   </div>
+                                   
+                                   <div class="col s12 input-field">
+                                     
+                                    <h:outputText value="Actif / Inactif" />
+                                    <p:selectBooleanCheckbox value="#{registreUtilisateurBean.isActif}" />
+                                   </div>
+                                   <div class="ui-fluid">
+                                   <p:panelGrid columns="2" columnClasses="ui-grid-col-2,ui-grid-col-10" layout="grid" styleClass="ui-panelgrid-blank">
+                                   
+                                    <p:outputLabel value="Role" />
+                                   <p:selectOneMenu value="#{registreUtilisateurBean.role}" style="width:125px">
+                                   <f:selectItem itemLabel="Member" itemValue="Member" />
+                                   
+
+                                   </p:selectOneMenu>
+                                   </p:panelGrid>
+                                   </div>
+                                 
+                                   
+                                   
+                                   
+
+                                   <div class="col s12 input-field">
+                                      <h:commandButton styleClass="btn btn-large" id="btn" action="#{registreUtilisateurBean.ajouterUser()}" value="Register" />
+
+                                   </div>
+
+                                  </div>
+
+<h:message for="btn" styleClass="errorMessages"/>
+
+
+</h:form>
+
+</div>
+</div>
+
+</div>
+</div>
+</div>
+</div>
+</div>
+
+</div>
+<script>
+$(document).on("ready",function(){
+	$('#login-page').css({'height':window.innerHeight + 'px'});
+});
+</script>
+</center>
+</h:body>
+</html>

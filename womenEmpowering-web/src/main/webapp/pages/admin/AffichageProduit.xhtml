@@ -1,0 +1,250 @@
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/pages/admin/admintheme.xhtml">
+
+	<ui:define name="content">
+
+		<h:form>
+
+
+			<div class="row">
+				<div class="col-md-12 col-sm-12 col-xs-12">
+					<div class="x_panel">
+						<div class="x_title">
+							<h2>
+								Produits <small></small>
+							</h2>
+							<ul class="nav navbar-right panel_toolbox">
+								<li><a class="collapse-link"><i
+										class="fa fa-chevron-up"></i></a></li>
+								<li class="dropdown"><a href="#" class="dropdown-toggle"
+									data-toggle="dropdown" role="button" aria-expanded="false"><i
+										class="fa fa-wrench"></i></a>
+									<ul class="dropdown-menu" role="menu">
+										<li><a href="#">Settings 1</a></li>
+										<li><a href="#">Settings 2</a></li>
+									</ul></li>
+								<li><a class="close-link"><i class="fa fa-close"></i></a></li>
+							</ul>
+							<div class="clearfix"></div>
+						</div>
+						<div class="x_content">
+
+							<table id="datatable" class="table table-striped table-bordered">
+								<thead>
+									<tr>
+										<th>Nom Produit</th>
+										<th>Date</th>
+										<th>Prix</th>
+										<th>Prix Avec Promotion</th>
+										<th>Promotion (%)</th>
+										<th>Description</th>
+										<th>Quantite</th>
+										<th>Nom Categorie</th>
+										<th>Action</th>
+										
+
+									</tr>
+								</thead>
+								<tbody>
+									<c:forEach items="#{produitBean.produitAll}" var="pro">
+										<tr>
+											<td><h:outputText value="#{pro.nameProduct}" /></td>
+											<td><h:outputText value="#{pro.dateProduct}" /></td>
+											<td><h:outputText value="#{pro.priceProduct}" /></td>
+											<td><h:outputText value="#{pro.priceProduct - (pro.priceProduct * pro.promotion / 100 )}" /></td>
+											<td><h:outputText value="#{pro.promotion}" /></td>
+											<td><h:outputText value="#{pro.description}" /></td>
+											<td><h:outputText value="#{pro.quantite}" /></td>
+											<td><h:outputText value="#{pro.categorie.nameCategorie}" /></td>
+											<td><h:commandButton
+													action="#{produitBean.SupprimerProduit(pro.productId)}"
+													value="Supprimer" /> <h:commandButton
+													action="#{produitBean.modifierProduit(pro)}"
+													value="Modifer" /></td>
+
+
+										</tr>
+
+									</c:forEach>
+								</tbody>
+
+
+							</table>
+
+
+						</div>
+					</div>
+				</div>
+
+			</div>
+
+
+
+		</h:form>
+
+
+
+<h:form class="form-horizontal form-label-left">
+
+		<div class="row">
+			<div class="col-md-12 col-xs-12">
+				<div class="x_panel">
+					<div class="x_title">
+						<h2>
+							Modifier <small>Produits :</small>
+						</h2>
+						<ul class="nav navbar-right panel_toolbox">
+							<li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a></li>
+							<li class="dropdown"><a href="#" class="dropdown-toggle"
+								data-toggle="dropdown" role="button" aria-expanded="false"><i
+									class="fa fa-wrench"></i></a>
+								<ul class="dropdown-menu" role="menu">
+									<li><a href="#">Settings 1</a></li>
+									<li><a href="#">Settings 2</a></li>
+								</ul></li>
+							<li><a class="close-link"><i class="fa fa-close"></i></a></li>
+						</ul>
+						<div class="clearfix"></div>
+					</div>
+					<div class="x_content">
+					
+
+
+						<div class="form-group">
+							<label class="control-label col-md-3 col-sm-3 col-xs-12">Nom
+								Produit</label>
+							<div class="col-md-4">
+								<h:inputText value="#{produitBean.nomProduit}"
+									class="form-control" placeholder="nom de produit" />
+
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="control-label col-md-3 col-sm-3 col-xs-12">Date
+								Création </label>
+							<div class="col-md-4">
+								<h:inputText id="date" value="#{produitBean.date}"
+									class="form-control" disabled="true">
+									<f:convertDateTime pattern="dd-MM-yyyy" />
+								</h:inputText>
+
+							</div>
+						</div>
+						<h:message for="date" style="color:red" />
+
+						<div class="form-group">
+							<label class="control-label col-md-3 col-sm-3 col-xs-12">Prix</label>
+							<div class="col-md-4">
+
+								<h:inputText value="#{produitBean.price}" class="form-control"
+									placeholder="Prix" id="validateSalaire" required="true"
+									requiredMessage="* Salaire obligatoire"
+									validatorMessage="* Salaire entre 350 et 3500">
+									<f:validateDoubleRange minimum="0" maximum="15000000"
+										for="validateSalaire"></f:validateDoubleRange>
+								</h:inputText>
+							</div>
+						</div>
+						<h:message for="validateSalaire" style="color:green" />
+						
+						<div class="form-group">
+							<label class="control-label col-md-3 col-sm-3 col-xs-12">Promotion (%)</label>
+							<div class="col-md-4">
+
+								<h:inputText value="#{produitBean.promotion}" class="form-control"
+									placeholder="Prix" id="validateSalaire2" 
+									requiredMessage="* Promotion obligatoire"
+									validatorMessage="* Promotion entre 0 et 100">
+									<f:validateDoubleRange minimum="0" maximum="100"
+										for="validateSalaire2"></f:validateDoubleRange>
+								</h:inputText>
+							</div>
+						</div>
+						<h:message for="validateSalaire" style="color:green" />
+
+
+<div class="form-group">
+									<label class="control-label col-md-3 col-sm-3 col-xs-12">Date Fin Promotion
+										</label>
+									<div class="col-md-4">
+                                    <p:calendar pattern="dd-MM-yyyy" value="#{produitBean.dateFinpromotion}">
+                                    
+                                    </p:calendar>
+									</div>
+								</div>
+						<div class="form-group">
+							<label class="control-label col-md-3 col-sm-3 col-xs-12">Description</label>
+							<div class="col-md-4">
+
+
+								<h:inputTextarea value="#{produitBean.description}"
+									class="form-control" placeholder="Description" />
+							</div>
+						</div>
+
+
+						<div class="form-group">
+							<label class="control-label col-md-3 col-sm-3 col-xs-12">Quantite</label>
+							<div class="col-md-4">
+
+
+								<h:inputText value="#{produitBean.quantite}"
+									class="form-control"
+									onkeypress="if(event.which &lt; 48 || event.which &gt; 57) return false;" />
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label class="control-label col-md-3 col-sm-3 col-xs-12">Categorie</label>
+							<div class="col-md-4">
+
+								<h:selectOneMenu class="form-control"
+									value="#{produitBean.selectedCategorieId}">
+									<f:selectItems value="#{produitBean.categoriesProduits}"
+										var="ProCat" itemValue="#{ProCat.categorieId}"
+										itemLabel="#{ProCat.nameCategorie}" />
+								</h:selectOneMenu>
+
+							</div>
+						</div>
+
+
+
+
+						<div class="ln_solid"></div>
+						<div class="form-group">
+							<div class="col-md-9 col-sm-9 col-xs-12 col-md-offset-3">
+								<button type="button" class="btn btn-primary">Cancel</button>
+								<h:commandButton class="btn btn-success"
+									action="#{produitBean.mettreAjourProduit()}" value="Modifier Produit" />
+
+
+							</div>
+						</div>
+
+
+					</div>
+				</div>
+			</div>
+		</div>
+
+
+
+</h:form>
+
+
+
+
+
+
+
+	</ui:define>
+
+</ui:composition>
+
